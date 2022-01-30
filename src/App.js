@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { useCallback } from 'react';
+import useFetch from './hooks/useFetch';
+import NewsService from './services/NewsService';
 
 function App() {
+  const news = useCallback(() => {
+    return NewsService.getNews();
+  }, []);
+
+  const {data, isLoading, error} = useFetch(news);
+  console.log(data);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h3 className="text-primary text-center">Welcome to JKKNIU Website</h3>
+      {
+        isLoading && <div>Loading...</div>
+      }
+      {
+        !isLoading && data?.map( news =>
+          <p className="bg-primary text-white mt-1 rounded text-center" key={news.id}>{news.product_name}</p>
+        )
+      }
     </div>
   );
 }
