@@ -5,8 +5,12 @@ class NewsService{
         return requests.get('/products.php')
     }
 
-    getProductById(id) {
+    getNewsById(id) {
         return requests.get(`/products.php?productId=${id}`);
+    }
+
+    deleteNewsById(id) {
+        return requests._delete(`/products.php?productId=${id}`);
     }
 }
 

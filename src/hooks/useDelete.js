@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const useFetch = (promise) => {
+const useDelete = (promise) => {
     const [data, setData] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -32,4 +32,4 @@ const useFetch = (promise) => {
     );
 };
 
-export default useFetch;
+export default useDelete;

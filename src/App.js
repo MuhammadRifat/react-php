@@ -1,27 +1,29 @@
-import { useCallback } from 'react';
-import useFetch from './hooks/useFetch';
-import NewsService from './services/NewsService';
+import React, { Suspense } from "react";
+import { Placeholder } from "react-bootstrap";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom";
+import AppSkeleton from "./components/skeletons/AppSkeleton";
+
+const Home = React.lazy(() => import("./pages/Home/Home"));
+const About = React.lazy(() => import("./pages/About/About"));
+const NotFound = React.lazy(() => import("./pages/NotFound/NotFound"));
 
 function App() {
-  const news = useCallback(() => {
-    return NewsService.getNews();
-  }, []);
-
-  const {data, isLoading, error} = useFetch(news);
-  console.log(data);
-
   return (
-    <div className="App">
-      <h3 className="text-primary text-center">Welcome to JKKNIU Website</h3>
-      {
-        isLoading && <div>Loading...</div>
-      }
-      {
-        !isLoading && data?.map( news =>
-          <p className="bg-primary text-white mt-1 rounded text-center" key={news.id}>{news.product_name}</p>
-        )
-      }
-    </div>
+    <Router>
+      <Suspense fallback={<AppSkeleton />}>
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+
+      </Suspense>
+    </Router>
   );
 }
 
