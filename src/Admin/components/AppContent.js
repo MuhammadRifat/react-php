@@ -2,10 +2,8 @@ import React, { Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { CContainer, CSpinner } from '@coreui/react'
 
-// routes config
-import routes from '../routes'
-import Dashboard from '../views/dashboard/Dashboard'
-import Notifications from '../views/notifications/Notifications'
+const Dashboard = React.lazy(() => import("../views/dashboard/Dashboard"));
+const Notifications = React.lazy(() => import("../views/notifications/Notifications"));
 
 const AppContent = () => {
   return (
