@@ -30,7 +30,7 @@ const AppSidebar = () => {
       // unfoldable={true}
       visible={dataContainer.sidebarShow}
       onVisibleChange={(visible) => {
-        setDataContainer({ sidebarShow: visible })
+        setDataContainer({...dataContainer, sidebarShow: visible })
       }}
     >
       <CSidebarBrand className="d-none d-md-flex" to="/">

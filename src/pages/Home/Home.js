@@ -10,7 +10,7 @@ const Home = () => {
     }, []);
 
     const { data, isLoading, error } = useFetch(news);
-    console.log(data);
+    // console.log(data);
     return (
         <div>
             <h3 className="text-primary text-center">Welcome to JKKNIU Website</h3>

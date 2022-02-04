@@ -24,7 +24,7 @@ const AppHeader = () => {
       <CContainer fluid>
         <CHeaderToggler
           className="ps-1"
-          onClick={() => setDataContainer({ sidebarShow: !dataContainer.sidebarShow })}
+          onClick={() => setDataContainer({ ...dataContainer, sidebarShow: !dataContainer.sidebarShow })}
         >
           <CIcon icon={cilMenu} size="lg" />
         </CHeaderToggler>
