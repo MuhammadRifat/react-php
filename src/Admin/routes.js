@@ -1,9 +1,8 @@
 import React from 'react'
 
-const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
-
 const routes = [
-  { path: '/dashboard', name: 'Dashboard', component: Dashboard },
+  { path: '/admin', name: 'Dashboard'},
+  { path: '/admin/notifications', name: 'Notifications'},
 ]
 
 export default routes
