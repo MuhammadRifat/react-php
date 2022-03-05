@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+// import { useSelector, useDispatch } from 'react-redux'
 
 import { CSidebar, CSidebarBrand, CSidebarNav, CSidebarToggler } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
@@ -13,11 +13,12 @@ import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
 
 // sidebar nav config
-import navigation from '../_nav'
+import adminNav from '../_navAdmin'
+import userNav from '../_navUser'
 import { userContext } from '../../App'
 
 const AppSidebar = () => {
-  
+
   const [dataContainer, setDataContainer] = useContext(userContext);
 
   // const dispatch = useDispatch()
@@ -30,7 +31,7 @@ const AppSidebar = () => {
       // unfoldable={true}
       visible={dataContainer.sidebarShow}
       onVisibleChange={(visible) => {
-        setDataContainer({...dataContainer, sidebarShow: visible })
+        setDataContainer({ ...dataContainer, sidebarShow: visible })
       }}
     >
       <CSidebarBrand className="d-none d-md-flex" to="/">
@@ -39,12 +40,12 @@ const AppSidebar = () => {
       </CSidebarBrand>
       <CSidebarNav>
         <SimpleBar>
-          <AppSidebarNav items={navigation} />
+          <AppSidebarNav items={dataContainer.role === 'admin' ? adminNav : userNav} />
         </SimpleBar>
       </CSidebarNav>
       <CSidebarToggler
         className="d-none d-lg-flex"
-        // onClick={() => dispatch({ type: 'set', sidebarUnfoldable: !unfoldable })}
+      // onClick={() => dispatch({ type: 'set', sidebarUnfoldable: !unfoldable })}
       />
     </CSidebar>
   )

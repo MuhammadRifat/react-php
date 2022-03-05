@@ -2,3 +2,94 @@
 @import './overrides/bootstrap';
 @import './global/global';
 @import './global/reset';
+
+// style for Add to Cart btn
+.addBtn{
+    background-color: $primary;
+    color: white;
+    border: none;
+    padding: 6px 15px;
+    border-radius: 15px;
+}
+
+.addBtn:hover{
+    background-color: $hover;
+}
+
+// Active Navigation
+.activeNav{
+    text-decoration: underline;
+    color: white;
+}
+
+.activeNav:hover{
+    color: white;
+}
+
+.categoryNav:hover{
+    background-color: $primary;
+}
+
+.positionSticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 73px;
+}
+
+// search form
+.search-form input{
+    width: 100%;
+    padding: 5px 12px;
+    border: none;
+    border-radius: 15px 0px 0px 15px;
+}
+
+.search-form input:focus{
+    outline: none;
+}
+
+.search-form button{
+    border: none;
+    padding: 5px 12px;
+    border: none;
+    background-color: lightgray;
+    border-radius: 0px 15px 15px 0px;
+}
+
+.bg-lightPrimary{
+    background-color: $lightPrimary;
+    color: white;
+}
+
+// cursor pointer
+.cursor-pointer{
+    cursor: pointer;
+}
+
+// side cart  button
+.sideCart{
+    position: fixed;
+    right: 0;
+    top: 45%;
+}
+
+.placeOrderBtn{
+    position: absolute;
+    bottom: 3px;
+    right: .5px;
+}
+
+.text-justify{
+    text-align: justify;
+}
+
+// responsive design
+@media only screen and (max-width: 768px) {
+    .hide {
+        display: none !important;
+    }
+    .show {
+        display: flex !important;
+    }
+}
+

@@ -1,6 +1,8 @@
-import React, { lazy } from 'react'
+import React, { lazy, useContext } from 'react'
+import { userContext } from '../../../App';
 
 const Dashboard = () => {
+  const [dataContainer] = useContext(userContext);
 
   return (
     <>

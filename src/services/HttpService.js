@@ -3,10 +3,18 @@ import axios from 'axios';
 const instance = axios.create({
     baseURL: process.env.REACT_APP_API_BASE_URL,
     timeout: 15000,
-    headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'bearer ' + btoa("rifat")
-    }
+});
+
+// Add a request interceptor 
+instance.interceptors.request.use(function (config) {
+    // Do something before request is sent
+    return {
+        ...config,
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
+    };
 });
 
 const responseBody = (response) => response.data;

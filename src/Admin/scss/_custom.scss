@@ -1,1 +1,13 @@
 // Here you can add other styles
+a{
+    text-decoration: none;
+}
+body {
+    background-color: rgb(248, 248, 248);
+}
+
+
+.bg-lightPrimary{
+    background-color: $lightPrimary;
+    color: white;
+}

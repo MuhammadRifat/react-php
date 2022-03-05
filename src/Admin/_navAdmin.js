@@ -3,17 +3,16 @@ import CIcon from '@coreui/icons-react'
 import {
   cilBell,
   cilChartPie,
-  cilCursor,
   cilDrop,
   cilSpeedometer,
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
-const _nav = [
+const _navAdmin = [
   {
     component: CNavItem,
     name: 'Dashboard',
-    to: '/admin/',
+    to: '/dashboard/',
     icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
     badge: {
       color: 'info',
@@ -31,32 +30,32 @@ const _nav = [
     icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
   },
   {
-    component: CNavTitle,
-    name: 'Components',
-  },
-  {
     component: CNavGroup,
-    name: 'Buttons',
-    to: '/buttons',
-    icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
+    name: 'Products',
+    to: '/dashboard/products',
+    icon: <CIcon icon={cilChartPie} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
-        name: 'Buttons',
-        to: '/admin/buttons',
+        name: 'Manage Products',
+        to: '/dashboard/products',
       },
       {
         component: CNavItem,
-        name: 'Buttons groups',
-        to: '/buttons/button-groups',
+        name: 'Add Product',
+        to: '/dashboard/addProduct',
       },
     ],
   },
   {
-    component: CNavItem,
-    name: 'About',
-    to: '/admin/about',
-    icon: <CIcon icon={cilChartPie} customClassName="nav-icon" />,
+    component: CNavTitle,
+    name: 'Components',
+  },
+  {
+      component: CNavItem,
+      name: 'Orders',
+      to: '/dashboard/orders',
+      icon: <CIcon icon={cilChartPie} customClassName="nav-icon" />,
   },
   {
     component: CNavGroup,
@@ -66,15 +65,15 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Alert',
-        to: '/admin/notifications',
+        to: '/dashboard/notifications',
       },
       {
         component: CNavItem,
         name: 'Badges',
-        to: '/admin/notifications/badges',
+        to: '/dashboard/notifications/badges',
       },
     ],
   },
 ]
 
-export default _nav
+export default _navAdmin

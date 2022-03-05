@@ -1,5 +1,6 @@
-import React, { useContext } from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useContext, useCallback } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
+import jwt_decode from 'jwt-decode';
 import {
   CContainer,
   CHeader,
@@ -15,9 +16,26 @@ import { cilBell, cilEnvelopeOpen, cilList, cilMenu } from '@coreui/icons'
 import { AppHeaderDropdown } from './header/index'
 import { logo } from '../assets/brand/logo'
 import { userContext } from '../../App'
+import UserService from '../../services/UserService';
+import useFetch from '../../hooks/useFetch';
 
 const AppHeader = () => {
   const [dataContainer, setDataContainer] = useContext(userContext);
+  const payloadData = jwt_decode(dataContainer.token);
+  const navigate = useNavigate();
+
+  const tokenExp = Math.floor(new Date().getTime() / 1000);
+
+  const getUserData = useCallback(() => {
+    setDataContainer({ ...dataContainer, id: payloadData.id, role: payloadData.role });
+    return UserService.getUserById({ id: payloadData.id, role: payloadData.role });
+  }, []);
+
+  const { data } = useFetch(getUserData);
+
+  if (payloadData.exp < tokenExp || !dataContainer.id || !dataContainer.role) {
+    navigate('/login');
+  }
 
   return (
     <CHeader position="sticky" className="mb-4">
@@ -62,7 +80,7 @@ const AppHeader = () => {
           </CNavItem>
         </CHeaderNav>
         <CHeaderNav className="ms-3">
-          <AppHeaderDropdown />
+          <AppHeaderDropdown imageURL={data?.imageURL} />
         </CHeaderNav>
       </CContainer>
     </CHeader>

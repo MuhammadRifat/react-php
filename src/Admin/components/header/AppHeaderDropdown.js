@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {
   CAvatar,
   CBadge,
@@ -21,14 +21,22 @@ import {
   cilUser,
 } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
+import { userContext } from '../../../App'
+import avatar from '../../assets/images/avatars/avater.png';
 
-import avatar8 from './../../assets/images/avatars/avater.png'
+const AppHeaderDropdown = ({ imageURL }) => {
+  const [dataContainer, setDataContainer] = useContext(userContext);
 
-const AppHeaderDropdown = () => {
+  // handle logout btn 
+  const handleLogout = () => {
+    localStorage.setItem("token", "");
+    setDataContainer({ sidebarShow: true })
+  }
+
   return (
     <CDropdown variant="nav-item">
       <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
-        <CAvatar src={avatar8} size="md" />
+        <CAvatar src={imageURL || avatar} size="md" />
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
         <CDropdownHeader className="bg-light fw-semibold py-2">Account</CDropdownHeader>
@@ -84,9 +92,9 @@ const AppHeaderDropdown = () => {
           </CBadge>
         </CDropdownItem>
         <CDropdownDivider />
-        <CDropdownItem href="#">
+        <CDropdownItem onClick={handleLogout} className="cursor-pointer">
           <CIcon icon={cilLockLocked} className="me-2" />
-          Lock Account
+          Log out
         </CDropdownItem>
       </CDropdownMenu>
     </CDropdown>

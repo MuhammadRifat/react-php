@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
     CButton,
     CCard,
@@ -16,10 +16,12 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import { userContext } from '../../App'
+import LoginService from '../../services/LoginService'
 
 const Login = () => {
     const [dataContainer, setDataContainer] = useContext(userContext);
     const [loginData, setLoginData] = useState({});
+    const [error, setError] = useState("");
     const navigate = useNavigate();
 
     // take input data
@@ -35,18 +37,31 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        setDataContainer({ ...dataContainer, ...loginData });
-        navigate('/admin');
+        const newData = { ...loginData, role: 'user' };
+        LoginService.userLogin(newData)
+            .then(response => {
+                if (response.status) {
+                    setDataContainer({ ...dataContainer, token: response.token });
+                    localStorage.setItem("token", response.token);
+                    navigate('/dashboard');
+                } else {
+                    setError(response.error);
+                }
+            })
+            .catch(error => {
+                setError(error.message);
+            })
     }
 
     return (
-        <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
+        <div className="bg-light d-flex flex-row align-items-center" style={{ minHeight: '80vh' }}>
             <CContainer>
                 <CRow className="justify-content-center">
                     <CCol md={8}>
                         <CCardGroup>
                             <CCard className="p-4">
                                 <CCardBody>
+                                    <span className="text-danger">{error}</span>
                                     <CForm onSubmit={handleSubmit}>
                                         <h1>Login</h1>
                                         <p className="text-medium-emphasis">Sign In to your account</p>
@@ -54,7 +69,7 @@ const Login = () => {
                                             <CInputGroupText>
                                                 <CIcon icon={cilUser} />
                                             </CInputGroupText>
-                                            <CFormInput placeholder="Username" name="username" onBlur={handleBlur} autoComplete="username" />
+                                            <CFormInput placeholder="Phone number" name="phone" id="phone" onBlur={handleBlur} autoComplete="phone" />
                                         </CInputGroup>
                                         <CInputGroup className="mb-4">
                                             <CInputGroupText>
@@ -63,6 +78,7 @@ const Login = () => {
                                             <CFormInput
                                                 type="password"
                                                 name="password"
+                                                id="password"
                                                 onBlur={handleBlur}
                                                 placeholder="Password"
                                                 autoComplete="current-password"
@@ -91,7 +107,7 @@ const Login = () => {
                                             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                                             tempor incididunt ut labore et dolore magna aliqua.
                                         </p>
-                                        <Link to="/register">
+                                        <Link to="/registration">
                                             <CButton color="primary" className="mt-3" active tabIndex={-1}>
                                                 Register Now!
                                             </CButton>
@@ -103,8 +119,6 @@ const Login = () => {
                     </CCol>
                 </CRow>
             </CContainer>
-
-            <Link to="/">Home</Link>
         </div>
     )
 }

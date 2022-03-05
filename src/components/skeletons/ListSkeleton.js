@@ -7,8 +7,8 @@ const ListSkeleton = () => {
         <ListGroup className="mt-1">
             {
                 index.map((id) =>
-                    <ListGroup.Item className="categoryNav">
-                        <Placeholder as="p" key={id} animation="glow">
+                    <ListGroup.Item className="categoryNav"  key={id}>
+                        <Placeholder as="p" animation="glow">
                             <Placeholder xs={12} />
                         </Placeholder>
                     </ListGroup.Item>

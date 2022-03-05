@@ -13,7 +13,7 @@ import { cilMagnifyingGlass } from '@coreui/icons'
 
 const NotFound = () => {
   return (
-    <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
+    <div className="bg-light d-flex flex-row align-items-center" style={{minHeight: '80vh'}}>
       <CContainer>
         <CRow className="justify-content-center">
           <CCol md={6}>
